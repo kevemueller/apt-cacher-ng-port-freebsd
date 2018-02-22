@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	apt-cacher-ng
-PORTVERSION=	0.9.3.2
+PORTVERSION=	3.1
 CATEGORIES=	www
 MASTER_SITES=	DEBIAN_POOL/apt-cacher-ng
-DISTFILES=	apt-cacher-ng_0.9.3.2.orig.tar.xz
+DISTFILES=	apt-cacher-ng_3.1.orig.tar.xz
 
 MAINTAINER=	keve@keve.hu
 COMMENT=	Specialized http/s proxy for caching software distribution sites
@@ -23,7 +23,9 @@ FUSE_DESC=	Include FUSE support.
 
 OPTIONS_DEFAULT=	SSL
 
-SSL_BUILD_DEPENDS=	pkg-config:${PORTSDIR}/devel/pkgconf
+DEFAULT_VERSIONS+=	ssl=openssl
+
+SSL_BUILD_DEPENDS=	pkg-config:${PORTSDIR}/devel/pkgconf openssl:${PORTSDIR}/security/openssl
 SSL_LIB_DEPENDS=	libcrypto.so:${PORTSDIR}/security/openssl
 #LIBWRAP_LIB_DEPENDS=	libwrap.so:${PORTSDIR}/...
 FUSE_LIB_DEPENDS=	libfuse.so:${PORTSDIR}/sysutils/fusefs-libs
