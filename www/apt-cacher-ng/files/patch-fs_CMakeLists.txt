@@ -1,0 +1,26 @@
+--- fs/CMakeLists.txt.orig	2016-07-12 20:11:46 UTC
++++ fs/CMakeLists.txt
+@@ -5,6 +5,10 @@ PROJECT(ACNG CXX C)
+ ## Attempt to build acngfs where possible ##
+ ############################################
+ 
++option(USE_FUSE "Use FUSE library to build acngfs" on)
++
++if(USE_FUSE)
++
+ pkg_check_modules(fuse fuse)
+ 
+ string(REPLACE ";" " " acngfs_cflags "${ACNG_CXXFLAGS_COMMON};-DMINIBUILD;${fuse_CFLAGS}")
+@@ -22,6 +26,7 @@ if(fuse_FOUND AND HAVE_FUSE_25)
+ 	endif()
+ 
+ 	ADD_EXECUTABLE(acngfs ${fsSRCS})
++	target_compile_features(acngfs PRIVATE cxx_auto_type)
+ 	INSTALL(TARGETS acngfs DESTINATION ${LIBDIR})
+ 
+ 	#message("uhm: ${fuse_CFLAGS} -- ${acngfs_cflags} -- ${fuse_LDFLAGS} -- ${HAVE_DLOPEN}")
+@@ -37,3 +42,4 @@ else(fuse_FOUND AND HAVE_FUSE_25)
+ endif(fuse_FOUND AND HAVE_FUSE_25)
+ 
+ 
++endif()
