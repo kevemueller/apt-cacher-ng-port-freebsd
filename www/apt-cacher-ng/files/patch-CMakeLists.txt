@@ -1,0 +1,8 @@
+--- CMakeLists.txt.orig	2018-02-23 09:09:07 UTC
++++ CMakeLists.txt
+@@ -406,4 +406,5 @@ DOCDIR: ${DOCDIR}
+ SYSCONFDIR: ${SYSCONFDIR}
+ CFGDIR: ${CFGDIR}
+ SBINDIR: ${SBINDIR}
++MANDIR: ${MANDIR}
+ ")
