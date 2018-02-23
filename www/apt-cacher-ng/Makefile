@@ -47,7 +47,6 @@ post-stage:
 	${INSTALL_MAN} ${WRKSRC}/ChangeLog ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${WRKSRC}/TODO ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${WRKDIR}/Readme.FreeBSD ${STAGEDIR}${DOCSDIR}
-	${GZIP_CMD} ${STAGEDIR}${PREFIX}/share/man/man8/*.8
 	${INSTALL} ${WRKDIR}/backends_debian ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
 	${INSTALL} ${WRKDIR}/backends_freebsd ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
 	${INSTALL} ${WRKDIR}/backends_ubuntu ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
