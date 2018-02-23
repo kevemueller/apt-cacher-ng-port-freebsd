@@ -14,7 +14,7 @@ WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-USES=		cmake:outsource tar:xz
+USES=		cmake:outsource tar:xz ssl
 USE_RC_SUBR=	apt_cacher_ng
 
 OPTIONS_DEFINE=	SSL FUSE DOCS #LIBWRAP
@@ -26,7 +26,7 @@ FUSE_DESC=	Include FUSE support.
 
 OPTIONS_DEFAULT=	SSL DOCS
 
-DEFAULT_VERSIONS+=	ssl=port
+DEFAULT_VERSIONS+=	ssl=openssl
 
 SSL_BUILD_DEPENDS=	pkg-config:${PORTSDIR}/devel/pkgconf openssl:${PORTSDIR}/security/openssl
 SSL_LIB_DEPENDS=	libcrypto.so:${PORTSDIR}/security/openssl
