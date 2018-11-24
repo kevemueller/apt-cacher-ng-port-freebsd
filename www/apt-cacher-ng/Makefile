@@ -9,8 +9,6 @@ DISTNAME=	${PORTNAME}_${PORTVERSION}.orig
 MAINTAINER=	keve@keve.hu
 COMMENT=	Specialized http/s proxy for caching software distribution sites
 
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
-
 LICENSE=	EduardBloch
 LICENSE_NAME=   Eduard Bloch license
 LICENSE_FILE=	${WRKSRC}/COPYING
@@ -18,6 +16,8 @@ LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
 USES=		cmake:outsource tar:xz
 USE_RC_SUBR=	apt_cacher_ng
+
+WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 OPTIONS_DEFINE=	SSL FUSE DOCS #LIBWRAP
 OPTIONS_SUB=	yes
