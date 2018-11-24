@@ -1,4 +1,4 @@
---- client/CMakeLists.txt.orig	2016-07-12 20:11:46 UTC
+--- client/CMakeLists.txt.orig	2018-09-07 13:02:18 UTC
 +++ client/CMakeLists.txt
 @@ -1,6 +1,7 @@
  PROJECT(ACNG CXX C)

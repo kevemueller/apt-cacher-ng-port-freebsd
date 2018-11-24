@@ -3,6 +3,7 @@
 %%ETCDIR%%/backends_freebsd
 %%ETCDIR%%/backends_ubuntu
 %%ETCDIR%%/security.conf
+etc/avahi/services/apt-cacher-ng.service
 %%FUSE%%lib/apt-cacher-ng/acngfs
 lib/apt-cacher-ng/acngtool
 lib/apt-cacher-ng/archlx_mirrors

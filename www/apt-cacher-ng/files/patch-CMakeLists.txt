@@ -1,4 +1,4 @@
---- CMakeLists.txt.orig	2017-11-05 19:54:13 UTC
+--- CMakeLists.txt.orig	2018-09-07 13:02:18 UTC
 +++ CMakeLists.txt
 @@ -26,20 +26,20 @@ INCLUDE(CheckSymbolExists)
  INCLUDE(FindPkgConfig)
@@ -54,7 +54,18 @@
  FILE(READ "${CMAKE_SOURCE_DIR}/VERSION" ACVERSION)
  string(REPLACE "\n" "" ACVERSION ${ACVERSION})
  #MESSAGE(STATUS "Version: ${ACVERSION}")
-@@ -380,10 +380,10 @@ add_subdirectory(systemd)
+@@ -308,7 +308,9 @@ SET(CMAKE_REQUIRED_LIBRARIES "")
+ set(HAVE_CHECKSUM on)
+ 
+ if(USE_SSL)
+-	pkg_check_modules(openssl openssl)
++	if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
++		pkg_check_modules(openssl openssl)
++	endif()
+ 	if(openssl_FOUND)
+ 		set(HAVE_SSL on)
+     _append(ACNG_COMPFLAGS ${openssl_CFLAGS})
+@@ -388,18 +390,22 @@ add_subdirectory(systemd)
  ###
  ### Extra install rules for static files
  ###
@@ -67,16 +78,21 @@
     set(MANDIR ${DATADIR}/man)
  endif()
  install(FILES doc/README doc/apt-cacher-ng.pdf DESTINATION ${DOCDIR})
-@@ -391,7 +391,7 @@ install(DIRECTORY doc/html/ DESTINATION 
+ install(DIRECTORY doc/html/ DESTINATION ${HTMLDIR}
     FILES_MATCHING PATTERN "*.*")
  install(DIRECTORY doc/man/ DESTINATION ${MANDIR}/man8
-    FILES_MATCHING PATTERN "*.8")
+-   FILES_MATCHING PATTERN "*.8")
 -if(NOT DEFINED(AVAHIDIR))
++   FILES_MATCHING PATTERN "apt-cacher-ng.8")
++if (USE_FUSE)
++install(DIRECTORY doc/man/ DESTINATION ${MANDIR}/man8
++   FILES_MATCHING PATTERN "acngfs.8")
++endif()
 +if(NOT DEFINED AVAHIDIR)
     set(AVAHIDIR "${SYSCONFDIR}/avahi/services")
  endif()
  install(FILES contrib/apt-cacher-ng.service DESTINATION ${AVAHIDIR})
-@@ -406,4 +406,5 @@ DOCDIR: ${DOCDIR}
+@@ -414,4 +420,5 @@ DOCDIR: ${DOCDIR}
  SYSCONFDIR: ${SYSCONFDIR}
  CFGDIR: ${CFGDIR}
  SBINDIR: ${SBINDIR}

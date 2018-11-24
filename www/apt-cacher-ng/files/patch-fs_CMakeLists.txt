@@ -1,4 +1,4 @@
---- fs/CMakeLists.txt.orig	2017-11-05 19:54:13 UTC
+--- fs/CMakeLists.txt.orig	2018-09-07 13:02:18 UTC
 +++ fs/CMakeLists.txt
 @@ -3,6 +3,10 @@
  ## Attempt to build acngfs where possible ##

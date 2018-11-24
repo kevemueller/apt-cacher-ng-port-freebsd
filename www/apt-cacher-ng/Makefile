@@ -1,10 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=	apt-cacher-ng
-PORTVERSION=	3.1
+PORTVERSION=	3.2
 CATEGORIES=	www
 MASTER_SITES=	DEBIAN_POOL/apt-cacher-ng
-#DISTFILES=	apt-cacher-ng_3.1.orig.tar.xz
 DISTNAME=	${PORTNAME}_${PORTVERSION}.orig
 
 MAINTAINER=	keve@keve.hu
@@ -12,9 +11,12 @@ COMMENT=	Specialized http/s proxy for caching software distribution sites
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
+LICENSE=	EduardBloch
+LICENSE_NAME=   Eduard Bloch license
 LICENSE_FILE=	${WRKSRC}/COPYING
+LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-USES=		cmake:outsource tar:xz ssl
+USES=		cmake:outsource tar:xz
 USE_RC_SUBR=	apt_cacher_ng
 
 OPTIONS_DEFINE=	SSL FUSE DOCS #LIBWRAP
@@ -26,19 +28,19 @@ FUSE_DESC=	Include FUSE support.
 
 OPTIONS_DEFAULT=	SSL DOCS
 
-DEFAULT_VERSIONS+=	ssl=openssl
+SSL_USES=		ssl
+#SSL_BUILD_DEPENDS=	pkg-config:devel/pkgconf
+#SSL_BUILD_DEPENDS=	pkg-config:devel/pkgconf openssl:security/openssl
+#SSL_LIB_DEPENDS=	libcrypto.so:security/openssl
 
-SSL_BUILD_DEPENDS=	pkg-config:${PORTSDIR}/devel/pkgconf openssl:${PORTSDIR}/security/openssl
-SSL_LIB_DEPENDS=	libcrypto.so:${PORTSDIR}/security/openssl
-#LIBWRAP_LIB_DEPENDS=	libwrap.so:${PORTSDIR}/...
-FUSE_LIB_DEPENDS=	libfuse.so:${PORTSDIR}/sysutils/fusefs-libs
+#LIBWRAP_LIB_DEPENDS=	libwrap.so:...
+FUSE_LIB_DEPENDS=	libfuse.so:sysutils/fusefs-libs
 
 CMAKE_ARGS+=	-DMANDIR:PATH=${PREFIX}/man
 
-SSL_CMAKE_ON=	-DUSE_SSL:BOOL=ON
-SSL_CMAKE_OFF=	-DUSE_SSL:BOOL=OFF
-FUSE_CMAKE_ON=	-DUSE_FUSE:BOOL=ON
-FUSE_CMAKE_OFF=	-DUSE_FUSE:BOOL=OFF
+SSL_CMAKE_BOOL=		USE_SSL
+FUSE_CMAKE_BOOL=	USE_FUSE
+SSL_CMAKE_ON=		-Dopenssl_FOUND=1 -Dopenssl_CFLAGS="-I ${OPENSSLINC}" -Dopenssl_LDFLAGS="-L ${OPENSSLLIB} -lssl -lcrypto"
 
 SUB_FILES=	backends_debian backends_freebsd backends_ubuntu freebsd_mirrors Readme.FreeBSD
 
