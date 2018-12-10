@@ -28,7 +28,6 @@ lib/apt-cacher-ng/ubuntu_mirrors
 lib/apt-cacher-ng/userinfo.html
 sbin/apt-cacher-ng
 %%PORTDOCS%%%%DOCSDIR%%/ChangeLog
-%%PORTDOCS%%%%DOCSDIR%%/COPYING
 %%PORTDOCS%%%%DOCSDIR%%/README
 %%PORTDOCS%%%%DOCSDIR%%/Readme.FreeBSD
 %%PORTDOCS%%%%DOCSDIR%%/TODO
@@ -45,7 +44,7 @@ sbin/apt-cacher-ng
 %%PORTDOCS%%%%DOCSDIR%%/html/secure.html
 %%PORTDOCS%%%%DOCSDIR%%/html/troublefaq.html
 %%PORTDOCS%%%%DOCSDIR%%/html/usage.html
-%%FUSE%%/man/man8/acngfs.8.gz
+%%FUSE%%man/man8/acngfs.8.gz
 man/man8/apt-cacher-ng.8.gz
 @dir(proxy,proxy,755) /var/cache/apt-cacher-ng
 @dir(proxy,proxy,755) /var/log/apt-cacher-ng
