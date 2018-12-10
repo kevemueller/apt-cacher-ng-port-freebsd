@@ -1,8 +1,8 @@
-%%ETCDIR%%/acng.conf
-%%ETCDIR%%/backends_debian
-%%ETCDIR%%/backends_freebsd
-%%ETCDIR%%/backends_ubuntu
-%%ETCDIR%%/security.conf
+@sample %%ETCDIR%%/acng.conf.sample
+@sample %%ETCDIR%%/backends_debian.sample
+@sample %%ETCDIR%%/backends_freebsd.sample
+@sample %%ETCDIR%%/backends_ubuntu.sample
+@sample(proxy,proxy,400) %%ETCDIR%%/security.conf.sample
 etc/avahi/services/apt-cacher-ng.service
 %%FUSE%%lib/apt-cacher-ng/acngfs
 lib/apt-cacher-ng/acngtool

@@ -1,0 +1,16 @@
+--- conf/CMakeLists.txt.orig	2018-09-07 13:02:18 UTC
++++ conf/CMakeLists.txt
+@@ -1,9 +1,9 @@
+ PROJECT(ACNG CXX C)
+ 
+-CONFIGURE_FILE("acng.conf.in" "${CMAKE_CURRENT_BINARY_DIR}/acng.conf")
+-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/acng.conf" DESTINATION ${CFGDIR})
+-install(DIRECTORY ./ DESTINATION ${CFGDIR}
+-   FILES_MATCHING PATTERN "*.conf")
++CONFIGURE_FILE("acng.conf.in" "${CMAKE_CURRENT_BINARY_DIR}/acng.conf.sample")
++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/acng.conf.sample" DESTINATION ${CFGDIR})
++install(FILES "security.conf" DESTINATION ${CFGDIR}
++   RENAME "security.conf.sample")
+ install(DIRECTORY ./ DESTINATION ${LIBDIR}
+    FILES_MATCHING REGEX "mirrors$|mirrors.gz$|html$|css$|default$")
+ 

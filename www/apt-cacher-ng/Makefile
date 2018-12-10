@@ -36,15 +36,15 @@ SSL_CMAKE_ON=		-Dopenssl_FOUND=1 -Dopenssl_CFLAGS="-I ${OPENSSLINC}" -Dopenssl_L
 
 FUSE_CMAKE_BOOL=	USE_FUSE
 
-SUB_FILES=	backends_debian backends_freebsd backends_ubuntu freebsd_mirrors Readme.FreeBSD
+SUB_FILES=	backends_debian.sample backends_freebsd.sample backends_ubuntu.sample freebsd_mirrors Readme.FreeBSD
 
 post-stage:
 	${INSTALL_DATA} ${WRKSRC}/ChangeLog ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/TODO ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKDIR}/Readme.FreeBSD ${STAGEDIR}${DOCSDIR}
-	${INSTALL} ${WRKDIR}/backends_debian ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
-	${INSTALL} ${WRKDIR}/backends_freebsd ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
-	${INSTALL} ${WRKDIR}/backends_ubuntu ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
+	${INSTALL} ${WRKDIR}/backends_debian.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
+	${INSTALL} ${WRKDIR}/backends_freebsd.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
+	${INSTALL} ${WRKDIR}/backends_ubuntu.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
 	${INSTALL_DATA} ${WRKDIR}/freebsd_mirrors ${STAGEDIR}${PREFIX}/lib/apt-cacher-ng
 	${MKDIR} ${STAGEDIR}/var/cache/apt-cacher-ng
 	${MKDIR} ${STAGEDIR}/var/log/apt-cacher-ng
