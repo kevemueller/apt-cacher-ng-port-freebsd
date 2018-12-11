@@ -45,7 +45,7 @@ post-stage:
 	${INSTALL} ${WRKDIR}/backends_debian.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
 	${INSTALL} ${WRKDIR}/backends_freebsd.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
 	${INSTALL} ${WRKDIR}/backends_ubuntu.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
-	${INSTALL_DATA} ${WRKDIR}/freebsd_mirrors ${STAGEDIR}${PREFIX}/lib/apt-cacher-ng
+	${INSTALL_DATA} ${WRKDIR}/freebsd_mirrors ${STAGEDIR}${DATADIR}
 	${MKDIR} ${STAGEDIR}/var/cache/apt-cacher-ng
 	${MKDIR} ${STAGEDIR}/var/log/apt-cacher-ng
 
