@@ -1,6 +1,6 @@
 --- source/CMakeLists.txt.orig	2018-09-07 13:02:18 UTC
 +++ source/CMakeLists.txt
-@@ -2,15 +2,18 @@ set(SHAREDSRCS acbuf.cc acfg.cc acfg_defaults.cc aclog
+@@ -2,15 +2,18 @@ set(SHAREDSRCS acbuf.cc acfg.cc acfg_def
  set(ACNG_SRCS apt-cacher.cc bgtask.cc cacheman.cc cleaner.cc conn.cc conserver.cc expiration.cc job.cc lockable.cc maintenance.cc mirror.cc pkgimport.cc rfc2553emu.cc showinfo.cc)
  
  ADD_LIBRARY(acngstuff OBJECT ${SHAREDSRCS})

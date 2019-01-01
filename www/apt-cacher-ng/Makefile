@@ -15,7 +15,7 @@ LICENSE_NAME=	Eduard Bloch license
 LICENSE_FILE=	${WRKSRC}/COPYING
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-USES=		cmake:outsource tar:xz
+USES=		cmake tar:xz
 USE_RC_SUBR=	apt_cacher_ng
 
 OPTIONS_DEFINE=	SSL FUSE DOCS
