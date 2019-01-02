@@ -29,7 +29,6 @@ sbin/acngtool
 %%FUSE%%sbin/acngfs
 %%PORTDOCS%%%%DOCSDIR%%/ChangeLog
 %%PORTDOCS%%%%DOCSDIR%%/README
-%%PORTDOCS%%%%DOCSDIR%%/Readme.FreeBSD
 %%PORTDOCS%%%%DOCSDIR%%/TODO
 %%PORTDOCS%%%%DOCSDIR%%/apt-cacher-ng.pdf
 %%PORTDOCS%%%%DOCSDIR%%/html/Intro.html

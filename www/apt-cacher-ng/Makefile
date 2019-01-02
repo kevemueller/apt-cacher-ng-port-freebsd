@@ -15,39 +15,41 @@ LICENSE_NAME=	Eduard Bloch license
 LICENSE_FILE=	${WRKSRC}/COPYING
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-USES=		cmake tar:xz
+USES=		compiler:c++11-lang cmake tar:xz
 USE_RC_SUBR=	apt_cacher_ng
 
-OPTIONS_DEFINE=	SSL FUSE DOCS
+CMAKE_ARGS=	-DLIBDIR:PATH=${DATADIR} \
+		-DMANDIR:PATH=${PREFIX}/man
+
+SUB_FILES=	backends_debian backends_freebsd backends_ubuntu \
+		freebsd_mirrors pkg-message
+
+OPTIONS_DEFINE=	DOCS SSL FUSE
 OPTIONS_DEFAULT=	SSL
 OPTIONS_SUB=	yes
 
-SSL_DESC=	Include SSL support to allow proxying https sites
-FUSE_DESC=	Include FUSE support enable interfacing with the proxy via the acngfs filesystem
+SSL_DESC=	SSL support to allow proxying https siteS
 
+SSL_CMAKE_BOOL=	USE_SSL
 SSL_USES=	ssl
+SSL_CMAKE_ON=	-Dopenssl_FOUND=1 \
+		-Dopenssl_CFLAGS="-I ${OPENSSLINC}" \
+		-Dopenssl_LDFLAGS="-L ${OPENSSLLIB} -lssl -lcrypto"
 
-FUSE_BUILD_DEPENDS=	pkg-config:devel/pkgconf
-FUSE_LIB_DEPENDS=	libfuse.so:sysutils/fusefs-libs
-
-CMAKE_ARGS+=	-DMANDIR:PATH=${PREFIX}/man
-
-SSL_CMAKE_BOOL=		USE_SSL
-SSL_CMAKE_ON=		-Dopenssl_FOUND=1 -Dopenssl_CFLAGS="-I ${OPENSSLINC}" -Dopenssl_LDFLAGS="-L ${OPENSSLLIB} -lssl -lcrypto"
+FUSE_DESC=	FUSE support for interfacing with the proxy via acngfs
 
 FUSE_CMAKE_BOOL=	USE_FUSE
+FUSE_USES=		fuse pkgconfig
 
-SUB_FILES=	backends_debian.sample backends_freebsd.sample backends_ubuntu.sample freebsd_mirrors Readme.FreeBSD
-
-post-stage:
-	${INSTALL_DATA} ${WRKSRC}/ChangeLog ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKSRC}/TODO ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKDIR}/Readme.FreeBSD ${STAGEDIR}${DOCSDIR}
-	${INSTALL} ${WRKDIR}/backends_debian.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
-	${INSTALL} ${WRKDIR}/backends_freebsd.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
-	${INSTALL} ${WRKDIR}/backends_ubuntu.sample ${STAGEDIR}${PREFIX}/etc/apt-cacher-ng
+post-install:
+	${MV} ${STAGEDIR}${ETCDIR}/acng.conf ${STAGEDIR}${ETCDIR}/acng.conf.sample
+	${MV} ${STAGEDIR}${ETCDIR}/security.conf ${STAGEDIR}${ETCDIR}/security.conf.sample
+	${INSTALL_DATA} ${WRKSRC}/ChangeLog ${WRKSRC}/TODO ${STAGEDIR}${DOCSDIR}
+.for f in backends_debian backends_freebsd backends_ubuntu
+	${INSTALL_DATA} ${WRKDIR}/${f} ${STAGEDIR}${ETCDIR}/${f}.sample
+.endfor
 	${INSTALL_DATA} ${WRKDIR}/freebsd_mirrors ${STAGEDIR}${DATADIR}
-	${MKDIR} ${STAGEDIR}/var/cache/apt-cacher-ng
-	${MKDIR} ${STAGEDIR}/var/log/apt-cacher-ng
+	${MKDIR} ${STAGEDIR}/var/cache/apt-cacher-ng \
+		${STAGEDIR}/var/log/apt-cacher-ng
 
 .include <bsd.port.mk>
