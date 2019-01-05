@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS SSL FUSE
 OPTIONS_DEFAULT=	SSL
 OPTIONS_SUB=	yes
 
-SSL_DESC=	SSL support to allow proxying https siteS
+SSL_DESC=	SSL support to allow proxying https sites
 
 SSL_CMAKE_BOOL=	USE_SSL
 SSL_USES=	ssl
