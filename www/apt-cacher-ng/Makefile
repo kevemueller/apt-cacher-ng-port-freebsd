@@ -3,14 +3,14 @@
 PORTNAME=	apt-cacher-ng
 PORTVERSION=	3.2
 PORTREVISION=	2
-DISTVERSION=	sid-20180907
+DISTVERSION=	ksid-20190106
 CATEGORIES=	www
 
 USE_GITLAB=	yes
 GL_SITE=	https://salsa.debian.org/
-GL_ACCOUNT=	blade
+GL_ACCOUNT=	keve-guest
 GL_PROJECT=	apt-cacher-ng
-GL_COMMIT=	12b93f63adff35da1ee11d94faded92d1120ebba
+GL_COMMIT=	27814547afe49770ce84c20b44f09ac8cc244f38
 
 MAINTAINER=	keve@keve.hu
 COMMENT=	Specialized http/s proxy for caching software distribution sites
